@@ -9,19 +9,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
-
-	private Integer userId;
+public class LoginCredResponseDto {
 
 	private String userName;
 
-	private Integer phoneNumber;
-
-	private String emailId;
-
-	private String password;
-
-	private Boolean isActive;
+	private Integer userId;
 
 	private String role;
 
