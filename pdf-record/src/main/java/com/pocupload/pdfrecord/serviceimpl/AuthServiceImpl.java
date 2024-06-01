@@ -30,24 +30,30 @@ public class AuthServiceImpl implements AuthService {
 		UserDetailsModel userDetailsModel = userRepository.getUserInfoByUserNameAndPassword(loginCredDto.getUserName(),
 				PasswordUtils.hashPassword(loginCredDto.getPassword()));
 
-		if (userDetailsModel.getIsActive()) {
-			LoginCredResponseDto loginCredResponseDto = userAuthMapperImpl
-					.mapUserCredToUserDetailsModel(userDetailsModel);
+		if (userDetailsModel != null) {
+			if (userDetailsModel.getIsActive()) {
+				LoginCredResponseDto loginCredResponseDto = userAuthMapperImpl
+						.mapUserCredToUserDetailsModel(userDetailsModel);
 
-			if (loginCredResponseDto != null) {
-				response.setStatus(HttpStatus.OK.value());
-				response.setValue(loginCredResponseDto);
-				response.setMessage("success!!");
-				return response;
+				if (loginCredResponseDto != null) {
+					response.setStatus(HttpStatus.OK.value());
+					response.setValue(loginCredResponseDto);
+					response.setMessage("success!!");
+					return response;
+				} else {
+					response.setMessage("Access Denied");
+					response.setValue(loginCredResponseDto);
+					response.setStatus(HttpStatus.FORBIDDEN.value());
+					return response;
+				}
 			} else {
-				response.setMessage("Access Denied");
-				response.setValue(loginCredResponseDto);
-				response.setStatus(HttpStatus.FORBIDDEN.value());
-				return response;
+				response.setMessage("Sorry Your Account Has Been Blocked Contact To Authority");
+				response.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
+				response.setValue(null);
 			}
 		} else {
-			response.setMessage("Sorry Your Account Has Been Blocked Contact To Authority");
-			response.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
+			response.setMessage("no record found");
+			response.setStatus(HttpStatus.OK.value());
 			response.setValue(null);
 		}
 

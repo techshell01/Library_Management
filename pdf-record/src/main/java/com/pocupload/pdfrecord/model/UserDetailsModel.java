@@ -36,10 +36,13 @@ public class UserDetailsModel extends AuditInfo {
 	private String userName;
 
 	@Column(name = "phone_number")
-	private Integer phoneNumber;
+	private String phoneNumber;
 
 	@Column(name = "password")
 	private String password;
+
+	@Column(name = "confirm_password")
+	private String confirmPassword;
 
 	@Column(name = "email_id", length = 50)
 	private String emailId;
