@@ -27,6 +27,13 @@ public class AuthServiceImpl implements AuthService {
 
 		ResponseDto<LoginCredResponseDto> response = new ResponseDto<LoginCredResponseDto>();
 
+		if (loginCredDto.getUserName() == null || loginCredDto.getPassword() == null) {
+			response.setMessage("Bad Request");
+			response.setResponse(null);
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			return response;
+		}
+
 		UserDetailsModel userDetailsModel = userRepository.getUserInfoByUserNameAndPassword(loginCredDto.getUserName(),
 				PasswordUtils.hashPassword(loginCredDto.getPassword()));
 
@@ -37,24 +44,25 @@ public class AuthServiceImpl implements AuthService {
 
 				if (loginCredResponseDto != null) {
 					response.setStatus(HttpStatus.OK.value());
-					response.setValue(loginCredResponseDto);
+					response.setResponse(loginCredResponseDto);
 					response.setMessage("success!!");
 					return response;
 				} else {
 					response.setMessage("Access Denied");
-					response.setValue(loginCredResponseDto);
+					response.setResponse(loginCredResponseDto);
 					response.setStatus(HttpStatus.FORBIDDEN.value());
 					return response;
 				}
 			} else {
 				response.setMessage("Sorry Your Account Has Been Blocked Contact To Authority");
 				response.setStatus(HttpStatus.NOT_ACCEPTABLE.value());
-				response.setValue(null);
+				response.setResponse(null);
 			}
 		} else {
+
 			response.setMessage("no record found");
 			response.setStatus(HttpStatus.OK.value());
-			response.setValue(null);
+			response.setResponse(null);
 		}
 
 		return response;

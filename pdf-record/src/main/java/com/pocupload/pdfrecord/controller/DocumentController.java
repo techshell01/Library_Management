@@ -33,7 +33,7 @@ public class DocumentController {
 		if (!listOfDocumentInfoDtos.isEmpty()) {
 
 			response.setStatus(HttpStatus.OK.value());
-			response.setValue(listOfDocumentInfoDtos);
+			response.setResponse(listOfDocumentInfoDtos);
 			response.setMessage("success!!");
 
 			return new ResponseEntity<ResponseDto<List<DocumentInfoDto>>>(response,
@@ -42,7 +42,7 @@ public class DocumentController {
 		} else {
 
 			response.setStatus(HttpStatus.OK.value());
-			response.setValue(listOfDocumentInfoDtos);
+			response.setResponse(listOfDocumentInfoDtos);
 			response.setMessage("No Data Present!!");
 
 			return new ResponseEntity<ResponseDto<List<DocumentInfoDto>>>(response,

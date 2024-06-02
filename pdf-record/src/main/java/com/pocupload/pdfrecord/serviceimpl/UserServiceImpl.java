@@ -41,17 +41,17 @@ public class UserServiceImpl implements UserService {
 			if (userDetail != null) {
 				userDto = userMapper.mapUserToUserDto(userDetail);
 				if (userDto != null) {
-					response.setValue(userDto);
+					response.setResponse(userDto);
 					response.setStatus(HttpStatus.OK.value());
 					response.setMessage("success!!");
 					return response;
 				} else {
 					response.setStatus(HttpStatus.NOT_FOUND.value());
-					response.setValue(userDto);
+					response.setResponse(userDto);
 					response.setMessage("Error Ouccers!!");
 				}
 			} else {
-				response.setValue(userDto);
+				response.setResponse(userDto);
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 				response.setMessage("Not Found!!");
 				return response;
@@ -80,18 +80,18 @@ public class UserServiceImpl implements UserService {
 				listOfUserDtos = userMapper.mapUserListToUserDtoList(listUserDetailsModels);
 
 				if (listOfUserDtos != null && !listOfUserDtos.isEmpty()) {
-					response.setValue(listOfUserDtos);
+					response.setResponse(listOfUserDtos);
 					response.setStatus(HttpStatus.OK.value());
 					response.setMessage("success!!");
 					return response;
 				} else {
-					response.setValue(listOfUserDtos);
+					response.setResponse(listOfUserDtos);
 					response.setStatus(HttpStatus.NO_CONTENT.value());
 					response.setMessage("Error Ouccers!!");
 				}
 
 			} else {
-				response.setValue(listOfUserDtos);
+				response.setResponse(listOfUserDtos);
 				response.setStatus(HttpStatus.NOT_FOUND.value());
 				response.setMessage("no records found");
 			}
@@ -118,19 +118,19 @@ public class UserServiceImpl implements UserService {
 				updatedUserDto = userMapper.mapUserToUserDto(userRepository.save(updatedUserDetails));
 
 				if (updatedUserDto != null) {
-					response.setValue(updatedUserDto);
+					response.setResponse(updatedUserDto);
 					response.setMessage("successfully update!!");
 					response.setStatus(HttpStatus.OK.value());
 					return response;
 				} else {
-					response.setValue(updatedUserDto);
+					response.setResponse(updatedUserDto);
 					response.setStatus(HttpStatus.NOT_MODIFIED.value());
 					response.setMessage("failed to update!!");
 				}
 			} else {
 				response.setMessage("update is not done!!");
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
-				response.setValue(updatedUserDto);
+				response.setResponse(updatedUserDto);
 			}
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -152,7 +152,7 @@ public class UserServiceImpl implements UserService {
 		userRepository.save(userDetails);
 
 		response.setStatus(HttpStatus.OK.value());
-		response.setValue(true);
+		response.setResponse(true);
 		response.setMessage("user delete successfuly!!");
 
 		return response;
@@ -167,7 +167,7 @@ public class UserServiceImpl implements UserService {
 		UserDetailsModel userInfo = userRepository.save(userMapper.mapUserDtoToUserModel(userDto));
 
 		response.setMessage("success!!");
-		response.setValue(userMapper.mapUserToUserDto(userInfo));
+		response.setResponse(userMapper.mapUserToUserDto(userInfo));
 		response.setStatus(HttpStatus.OK.value());
 
 		return response;

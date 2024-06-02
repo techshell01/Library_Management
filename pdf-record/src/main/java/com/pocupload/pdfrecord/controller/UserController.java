@@ -55,7 +55,7 @@ public class UserController {
 	@DeleteMapping("/delete-user-by-id/{userId}")
 	public ResponseEntity<ResponseDto<Boolean>> deleteUserById(@PathVariable("userId") Integer userId) {
 		ResponseDto<Boolean> response = userService.deleteUserById(userId);
-		if (response.getValue()) {
+		if (response.getResponse()) {
 			return new ResponseEntity<>(userService.deleteUserById(userId),
 					HttpStatusCode.valueOf(HttpStatus.OK.value()));
 		} else {

@@ -43,7 +43,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 				.collect(Collectors.toList());
 
 		responseDto.setMessage("success!!");
-		responseDto.setValue(userRoleMapper.mapRoleModelListToRoleDtoList(listUserRoles));
+		responseDto.setResponse(userRoleMapper.mapRoleModelListToRoleDtoList(listUserRoles));
 		responseDto.setStatus(HttpStatus.OK.value());
 
 		return responseDto;
@@ -61,13 +61,13 @@ public class UserRoleServiceImpl implements UserRoleService {
 
 			response.setMessage("success!!");
 			response.setStatus(HttpStatus.OK.value());
-			response.setValue(Boolean.TRUE);
+			response.setResponse(Boolean.TRUE);
 
 			return response;
 		}
 
 		response.setMessage("Error To Save Role!!");
-		response.setValue(Boolean.FALSE);
+		response.setResponse(Boolean.FALSE);
 		response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
 
 		return response;

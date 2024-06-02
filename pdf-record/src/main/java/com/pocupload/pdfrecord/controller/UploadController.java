@@ -28,11 +28,11 @@ public class UploadController {
 
 		if (response) {
 			responseDto.setStatus(HttpStatus.OK.value());
-			responseDto.setValue(response);
+			responseDto.setResponse(response);
 			responseDto.setMessage("Document Uploaded Successfully!!");
 		} else {
 			responseDto.setStatus(HttpStatus.OK.value());
-			responseDto.setValue(response);
+			responseDto.setResponse(response);
 			responseDto.setMessage("Please upload valid file!!");
 		}
 
@@ -49,11 +49,11 @@ public class UploadController {
 
 		if (response) {
 			responseDto.setStatus(HttpStatus.OK.value());
-			responseDto.setValue(response);
+			responseDto.setResponse(response);
 			responseDto.setMessage("Document Uploaded Successfully!!");
 		} else {
 			responseDto.setStatus(HttpStatus.OK.value());
-			responseDto.setValue(response);
+			responseDto.setResponse(response);
 			responseDto.setMessage("Please upload valid file!!");
 		}
 

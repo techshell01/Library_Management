@@ -11,7 +11,7 @@ public class ResponseDto<T> {
 
 	private Integer status;
 
-	private T value;
+	private T response;
 
 	private String message;
 
