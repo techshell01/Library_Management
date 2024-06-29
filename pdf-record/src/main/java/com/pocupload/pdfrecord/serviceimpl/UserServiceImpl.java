@@ -11,9 +11,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.pocupload.pdfrecord.common.ResponseDto;
+import com.pocupload.pdfrecord.dto.DepartmenNameIdDto;
 import com.pocupload.pdfrecord.dto.UserDto;
 import com.pocupload.pdfrecord.mapper.UserMapper;
+import com.pocupload.pdfrecord.model.UserDepartmentMapper;
 import com.pocupload.pdfrecord.model.UserDetailsModel;
+import com.pocupload.pdfrecord.repository.DepartmentRepository;
+import com.pocupload.pdfrecord.repository.UserDepartmentMapperRepository;
 import com.pocupload.pdfrecord.repository.UserRepository;
 import com.pocupload.pdfrecord.service.UserService;
 
@@ -24,6 +28,12 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+
+	@Autowired
+	UserDepartmentMapperRepository userDepartmentMapperRepository;
+
+	@Autowired
+	DepartmentRepository departmentRepository;
 
 	@Autowired
 	UserMapper userMapper;
@@ -164,7 +174,21 @@ public class UserServiceImpl implements UserService {
 
 		ResponseDto<UserDto> response = new ResponseDto<>();
 
+		UserDepartmentMapper userDepartmentSave = null;
+
+		List<UserDepartmentMapper> listOfUserDepartmentMapper = new ArrayList<UserDepartmentMapper>();
+
 		UserDetailsModel userInfo = userRepository.save(userMapper.mapUserDtoToUserModel(userDto));
+
+		for (DepartmenNameIdDto departmentNameIdDto : userDto.getDepartmentNameList()) {
+			userDepartmentSave = new UserDepartmentMapper();
+			userDepartmentSave.setDepartment(departmentRepository
+					.existByDepartName(departmentNameIdDto.getDepartmentName(), departmentNameIdDto.getPlantName()));
+			userDepartmentSave.setUserDetailsModel(userInfo);
+			listOfUserDepartmentMapper.add(userDepartmentSave);
+		}
+		if (listOfUserDepartmentMapper != null && !listOfUserDepartmentMapper.isEmpty())
+			userDepartmentMapperRepository.saveAll(listOfUserDepartmentMapper);
 
 		response.setMessage("success!!");
 		response.setResponse(userMapper.mapUserToUserDto(userInfo));

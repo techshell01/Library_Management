@@ -1,5 +1,7 @@
 package com.pocupload.pdfrecord.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +22,8 @@ public class UserDto {
 	private String emailId;
 
 	private String password;
+
+	private List<DepartmenNameIdDto> departmentNameList;
 
 	private Boolean isActive;
 

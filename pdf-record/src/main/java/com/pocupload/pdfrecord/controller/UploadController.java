@@ -21,10 +21,10 @@ public class UploadController {
 
 	@PostMapping("/doc-upload")
 	public ResponseEntity<ResponseDto<Boolean>> uploadDocument(@RequestParam("file") MultipartFile multipartFile,
-			@RequestParam("directory") String directory) {
+			@RequestParam("requestbody") String uploadDocumentDto) {
 
 		ResponseDto<Boolean> responseDto = new ResponseDto<Boolean>();
-		Boolean response = documentService.uploadDocument(multipartFile, directory);
+		Boolean response = documentService.uploadDocument(multipartFile, uploadDocumentDto);
 
 		if (response) {
 			responseDto.setStatus(HttpStatus.OK.value());
@@ -42,10 +42,11 @@ public class UploadController {
 
 	@PostMapping("/multiple-doc-upload")
 	public ResponseEntity<ResponseDto<Boolean>> uploadMultipleDocuments(
-			@RequestParam("file") MultipartFile[] multipartFile, @RequestParam("directory") String directory) {
+			@RequestParam("file") MultipartFile[] multipartFile,
+			@RequestParam("requestbody") String uploadDocumentInfo) {
 
 		ResponseDto<Boolean> responseDto = new ResponseDto<Boolean>();
-		Boolean response = documentService.uploadMultipleDocuments(multipartFile, directory);
+		Boolean response = documentService.uploadMultipleDocuments(multipartFile, uploadDocumentInfo);
 
 		if (response) {
 			responseDto.setStatus(HttpStatus.OK.value());

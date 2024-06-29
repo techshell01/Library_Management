@@ -23,9 +23,27 @@ public class DocumentInfoDto {
 
 	private Integer endIndex;
 
+	private String documentType;
+
 	private Boolean isActive;
 
+	private Boolean isHodDocument;
+
+	private Boolean isStatutory;
+
+	private Boolean isRestrictedDocument;
+
+	private String uniqueFileName;
+
 	private String directory;
+
+	private String department;
+
+	private String subArea;
+
+	private String plant;
+
+	private String mainHead;
 
 	private String fileUrl;
 
