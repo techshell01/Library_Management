@@ -29,11 +29,11 @@ public class UserLogging {
     @Column(name = "action")
     private String action;
 
-    @ManyToOne(targetEntity = Department.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = Department.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", referencedColumnName = "department_id")
     private Department department;
 
-    @ManyToOne(targetEntity = UserRole.class, fetch = FetchType.EAGER)
+    @ManyToOne(targetEntity = UserRole.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     private UserRole userRole;
 
